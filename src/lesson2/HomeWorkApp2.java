@@ -13,11 +13,9 @@ public class HomeWorkApp2 {
     }
 
     public static boolean checkSum10to20(int a, int b){
-        if (((a + b) >= 10) && ((a + b) <= 20)){
-            return true;
-        } else {
-            return false;
-        }
+
+        return ((a + b) >= 10 && (a + b) <= 20);
+
     }
 
     public static void checkMod(int a){
@@ -32,11 +30,7 @@ public class HomeWorkApp2 {
 
     public static boolean checkModAnti(int a){
 
-        if (a < 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return (a < 0);
 
     }
 
@@ -48,10 +42,7 @@ public class HomeWorkApp2 {
 
     public static boolean checkFor29Feb(int year){
 
-        if (((year % 4) == 0) && !(((year % 100) == 0) ^ ((year % 400) == 0))){
-            return true;
-        } else
-            return false;
+            return (((year % 4) == 0) && !(((year % 100) == 0) ^ ((year % 400) == 0)));
 
     }
 }
