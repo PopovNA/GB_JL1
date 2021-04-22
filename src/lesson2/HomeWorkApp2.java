@@ -20,11 +20,7 @@ public class HomeWorkApp2 {
 
     public static void checkMod(int a){
 
-        if (a >= 0) {
-            System.out.println("Positive");
-        } else {
-            System.out.println("Negative");
-        }
+        System.out.println(((a >= 0) ? "Positive" : "Negative"));
 
     }
 
