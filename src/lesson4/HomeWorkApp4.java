@@ -9,7 +9,7 @@ public class HomeWorkApp4 {
     public static Random random = new Random();
 
     public static char[][] map;
-    public static int field_length = 3;// + random.nextInt(3);
+    public static int field_length = 3 + random.nextInt(3);
     public static int mapSizeX = field_length;
     public static int mapSizeY = field_length;
     public static int winLength = 3;
@@ -78,14 +78,66 @@ public class HomeWorkApp4 {
     public static void aiTurn() {
         int x, y;
 
-        do {
-            y = random.nextInt(mapSizeY);
-            x = random.nextInt(mapSizeX); //[0;mapSize)
-        } while (!isEmptyCell(x, y));
-
         /**
-         *
+         * Вместо случайного выбора, делаем перебор всех вариантов с оценкой "веса" хода.
+         * Исключение победа противника, тогда блок!
+         * Результат заносим в массив такого же размера, где
+         * 0 - ячейка занята,
+         * 1000 - блокирующая ячейка для победы противника
+         * 10000 - ячейка победного хода
+         * 1 - ход возможен, но не ведет ни к победе, ни к проигрышу
          */
+
+        int[][] matrix = new int[mapSizeY][mapSizeX];
+
+        x = y = -1;
+        for (int i = 0; i < mapSizeY; i++) {
+            for (int j = 0; j < mapSizeX; j++) {
+                if (!isEmptyCell(j, i)) {
+                    matrix[i][j] = 0;
+                    continue;
+                }
+                map[i][j] = human;
+                if (isWin(human)) {
+                    map[i][j] = empty_field;
+                    matrix[i][j] = 1000;
+                    x = j;
+                    y = i;
+                    continue;
+                }
+                map[i][j] = ai;
+                if (isWin(ai)) {
+                    map[i][j] = empty_field;
+                    matrix[i][j] = 10000;
+                    x = j;
+                    y = i;
+                    break;
+                }
+                map[i][j] = empty_field;
+                matrix[i][j] = 1;
+            }
+            // проверяем, если победный ход найден, то дальше не идем
+            if (!(x < 0) && (matrix[y][x] > 1000)) {
+                break;
+            }
+        }
+        if (x < 0) {
+            x = y = 0;
+            for (int i = 0; i < mapSizeY; i++) {
+                for (int j = 0; j < mapSizeX; j++) {
+                    if (matrix[y][x] < matrix[i][j]) {
+                        x = j;
+                        y = i;
+                    }
+                    if (matrix[y][x] > 1000) {
+                        break;
+                    }
+                }
+                if (matrix[y][x] > 1000) {
+                    break;
+                }
+            }
+        }
 
         System.out.println("AI turn is [" + (y + 1) + ":" + (x + 1) + "]");
         map[y][x] = ai;
@@ -93,7 +145,7 @@ public class HomeWorkApp4 {
     }
 
     public static boolean isWin(char player) {
-        int count_player;
+        int count_player = 0;
 
         for (int i = 0; i <= (map.length - winLength); i++){
             for (int j = 0; j <= (map.length - winLength); j++) {
@@ -151,7 +203,7 @@ public class HomeWorkApp4 {
             showMap();
 
             if (isWin(ai)) {
-                System.out.println("Human win!!!");
+                System.out.println("AI win!!!");
                 break;
             }
 
