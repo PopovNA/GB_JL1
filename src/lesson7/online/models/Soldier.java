@@ -43,6 +43,10 @@ public abstract class Soldier {
         System.out.println(this.name + " heal self " + summaryHeal + ". My hp = " + this.hp);
     }
 
+    public void healTarget(Soldier target, int heal) {
+        target.hp += heal;
+    }
+
     public String getMeInfo() {
         return "My name is " + this.name + ". My attack " + this.attack + ". My health is " + this.hp;
     }
