@@ -22,9 +22,9 @@ public class HomeWorkApp5 {
             employees[i].incSalary4more35();
         }
 
-//        for (int i = 0; i < employees.length; i++) {
-//            System.out.println("ID: " + employees[i].getId() + " Salary " + employees[i].getSalary());
-//        }
+        for (int i = 0; i < employees.length; i++) {
+            System.out.println("ID: " + employees[i].getUid() + " Salary " + employees[i].getSalary());
+        }
 
     }
 }

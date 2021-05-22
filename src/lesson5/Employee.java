@@ -7,15 +7,17 @@ public class Employee {
     private String phoneNumber;
     private float salary;
     private int age;
-    private int id = 0;
+    private int uid;
 
-    public Employee(String valueName, String valuePosition, String valuePhoneNumber, float valueSalary, int valueAge){
-        name = valueName;
-        position = valuePosition;
-        phoneNumber = valuePhoneNumber;
-        salary = valueSalary;
-        age = valueAge;
-        id = IdGenerator.newId();
+    private static int id = 0;
+
+    public Employee(String name, String position, String phoneNumber, float salary, int age){
+        this.name = name;
+        this.position = position;
+        this.phoneNumber = phoneNumber;
+        this.salary = salary;
+        this.age = age;
+        this.uid = ++id;
     }
 
     public void incSalary4more35(){
@@ -44,7 +46,7 @@ public class Employee {
         return age;
     }
 
-    public int getId() {
-        return id;
+    public int getUid() {
+        return uid;
     }
 }
