@@ -1,10 +1,5 @@
 package lesson7.online;
 
-import Lection06.Homework.Cat;
-import Lection06.online.Titan;
-
-import java.util.Scanner;
-
 /**
  * Created by Aleksandr Gladkov [Anticisco]
  * Date: 12.05.2021
