@@ -145,8 +145,9 @@ public class HomeWorkApp4 {
     }
 
     public static boolean isWin(char player) {
-        int count_player = 0;
+        int count_player1, count_player2, count_player3, count_player4;
 
+        /** первая реализация
         for (int i = 0; i <= (map.length - winLength); i++){
             for (int j = 0; j <= (map.length - winLength); j++) {
                 for (int y = 0; y < winLength; y++) {
@@ -175,6 +176,27 @@ public class HomeWorkApp4 {
                 if (count_player == winLength) return true;
             }
         }
+        */
+        /** вторая реализация, убираю избыток циклов, но добавляются счетчики
+         *  вот знал, что можно лучше, но как всегда все в последний момент :-) */
+        for (int i = 0; i <= (map.length - winLength); i++){
+            for (int j = 0; j <= (map.length - winLength); j++) {
+                count_player3 = count_player4 = 0;
+                for (int y = 0; y < winLength; y++) {
+                    count_player1 = count_player2 = 0;
+                    for (int x = 0; x < winLength; x++) {
+                        if (map[i + y][j + x] == player) count_player1++;
+                        if (map[i + x][j + y] == player) count_player2++;
+                    }
+                    if (map[i + y][j + y] == player) count_player3++;
+                    if (map[i + y][j - y + winLength - 1] == player) count_player4++;
+                    if ((count_player1 == winLength) || (count_player2 == winLength)
+                     || (count_player3 == winLength) || (count_player4 == winLength))
+                        return true;
+                }
+            }
+        }
+
         return false;
 
     }
